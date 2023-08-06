@@ -24,6 +24,7 @@ const mockOverview: Overview = {
 };
 
 export const overviewApi = createApi({
+  reducerPath: 'overview',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.PUBLIC_OVERVIEW_ENDPOINT,
   }),

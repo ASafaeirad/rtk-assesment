@@ -21,3 +21,9 @@ export interface Overview {
   installs: Install[];
   revenue: Revenue[];
 }
+
+export interface Campaign {
+  id: string;
+  name: string;
+  installs: Install[];
+}
