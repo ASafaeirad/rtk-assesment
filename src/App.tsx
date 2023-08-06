@@ -9,16 +9,16 @@ import { theme } from './theme';
 
 const router = createBrowserRouter([
   {
+    path: '/',
+    errorElement: <Navigate to="/overview" />,
+  },
+  {
     path: '/overview',
     element: <div>Overview</div>,
   },
   {
     path: '/campaign',
     element: <div>Campaign</div>,
-  },
-  {
-    path: '/*',
-    element: <Navigate to="/overview" />,
   },
 ]);
 
