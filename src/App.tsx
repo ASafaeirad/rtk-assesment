@@ -1,10 +1,11 @@
-import { CssBaseline } from '@mui/material';
-import { Fragment } from 'react';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from 'react-router-dom';
+
+import { theme } from './theme';
 
 const router = createBrowserRouter([
   {
@@ -23,9 +24,9 @@ const router = createBrowserRouter([
 
 export const App = () => {
   return (
-    <Fragment>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <RouterProvider router={router} />
-    </Fragment>
+    </ThemeProvider>
   );
 };
