@@ -12,6 +12,11 @@
     }
   },
   "rules": {
-    "@typescript-eslint/no-invalid-void-type": "off"
+    "@typescript-eslint/no-invalid-void-type": "off",
+    "jest/no-conditional-in-test": "off",
+    "jest/prefer-each": "off",
+    "jest/prefer-mock-promise-shorthand": "off",
+    "jest/prefer-snapshot-hint": "off",
+    "jest/prefer-hooks-in-order": "off"
   }
 }

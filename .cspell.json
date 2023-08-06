@@ -4,12 +4,12 @@
   "language": "en",
   "dictionaryDefinitions": [
     {
-      "name": "adjoe",
+      "name": "rtk",
       "path": "./configs/cspell/words.txt",
       "addWords": true
     }
   ],
-  "dictionaries": ["adjoe"],
+  "dictionaries": ["rtk"],
   "ignorePaths": [
     "node_modules/",
     "dist/",

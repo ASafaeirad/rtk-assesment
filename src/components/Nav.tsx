@@ -39,7 +39,7 @@ const Header = ({ onMenuButtonClick }: { onMenuButtonClick: VoidFunction }) => {
             variant="h6"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            Adjoe Frontend Test
+            Frontend Test
           </Typography>
           <Stack direction="row" spacing={2}>
             {navItems.map(item => (
@@ -78,7 +78,7 @@ export const NavigationDrawer = ({
       >
         <Box onClick={onClose} sx={{ textAlign: 'center' }}>
           <Typography variant="h6" sx={{ my: 2 }}>
-            Adjoe Frontend Test
+            Frontend Test
           </Typography>
           <Divider />
           <List>

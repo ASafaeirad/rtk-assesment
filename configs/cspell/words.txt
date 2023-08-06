@@ -1,7 +1,6 @@
 fullstacksjs
 TTFB
 fontsource
-Adjoe
 Serie
 Nivo
 reduxjs
