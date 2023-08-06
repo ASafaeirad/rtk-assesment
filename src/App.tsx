@@ -1,4 +1,5 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import { Provider } from 'react-redux';
 import {
   createBrowserRouter,
   Navigate,
@@ -7,8 +8,8 @@ import {
 
 import { Layout } from './Layout';
 import { CampaignPage } from './routes/Campaign';
-import { CreateCampaignPage } from './routes/CreateCampaign';
-import { overLoader, OverviewPage } from './routes/Overview';
+import { OverviewPage } from './routes/Overview';
+import { store } from './services';
 import { theme } from './theme';
 
 const router = createBrowserRouter([
@@ -16,9 +17,9 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
-      { path: '/overview', element: <OverviewPage />, loader: overLoader },
-      { path: '/campaigns', element: <CampaignPage /> },
-      { path: '/campaigns/new', element: <CreateCampaignPage /> },
+      { path: 'overview', element: <OverviewPage /> },
+      { path: 'campaigns', element: <CampaignPage /> },
+      { path: '*', element: <Navigate to="/overview" /> },
     ],
     errorElement: <Navigate to="/overview" />,
   },
@@ -26,9 +27,11 @@ const router = createBrowserRouter([
 
 export const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   );
 };

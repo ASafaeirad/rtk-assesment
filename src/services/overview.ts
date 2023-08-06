@@ -1,8 +1,8 @@
-import { sleep } from '@fullstacksjs/toolbox';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import type { Overview } from './Domain';
+import type { Overview } from './domain';
 
-const mock: Overview = {
+const mockOverview: Overview = {
   installs: [
     { day: 'monday', value: 145 },
     { day: 'tuesday', value: 256 },
@@ -23,14 +23,17 @@ const mock: Overview = {
   ],
 };
 
-export const getOverview = async (): Promise<Overview> => {
-  const res = await fetch(
-    'https://5c3db915a9d04f0014a98a79.mockapi.io/overview',
-  );
-  return res.json();
-};
+export const overviewApi = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.PUBLIC_OVERVIEW_ENDPOINT,
+  }),
+  tagTypes: ['Overview'],
+  endpoints: build => ({
+    getOverview: build.query<Overview, void>({
+      // query: () => ({ url: `overview` }),
+      queryFn: () => Promise.resolve({ data: mockOverview }),
+    }),
+  }),
+});
 
-export const getMockedOverview = async (delay: number): Promise<Overview> => {
-  await sleep(delay);
-  return Promise.resolve(mock);
-};
+export const { useGetOverviewQuery } = overviewApi;

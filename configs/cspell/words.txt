@@ -4,3 +4,4 @@ fontsource
 Adjoe
 Serie
 Nivo
+reduxjs

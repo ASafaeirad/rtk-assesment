@@ -1,40 +1,39 @@
 import { Stack } from '@mui/material';
 import type { Serie } from '@nivo/line';
 import { useMemo } from 'react';
-import { useLoaderData, useNavigation } from 'react-router-dom';
+import { useNavigation } from 'react-router-dom';
 
 import { LineChart } from '../components/LineChart';
-import type { Overview } from '../data-layer/Domain';
-import { getMockedOverview } from '../data-layer/getOverview';
-
-export async function overLoader() {
-  const overview = await getMockedOverview(50);
-
-  return { overview };
-}
+import { useGetOverviewQuery } from '../services/overview';
 
 export const OverviewPage = () => {
-  const { overview } = useLoaderData() as { overview: Overview };
+  const { data: overview } = useGetOverviewQuery();
   const navigation = useNavigation();
 
   const installs: Serie[] = useMemo(
     () => [
       {
         id: 'installs',
-        data: overview.installs.map(({ day, value }) => ({ x: day, y: value })),
+        data:
+          overview?.installs.map(({ day, value }) => ({
+            x: day,
+            y: value,
+          })) ?? [],
       },
     ],
-    [overview.installs],
+    [overview?.installs],
   );
 
   const revenue: Serie[] = useMemo(
     () => [
       {
         id: 'revenue',
-        data: overview.revenue.map(({ day, value }) => ({ x: day, y: value })),
+        data:
+          overview?.revenue.map(({ day, value }) => ({ x: day, y: value })) ??
+          [],
       },
     ],
-    [overview.revenue],
+    [overview?.revenue],
   );
 
   if (navigation.state === 'loading') return <>loading</>;
