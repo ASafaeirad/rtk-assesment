@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 
 import { Layout } from './Layout';
-import { Campaign } from './routes/Campaign';
-import { Overview } from './routes/Overview';
+import { CampaignPage } from './routes/Campaign';
+import { overLoader, OverviewPage } from './routes/Overview';
 import { theme } from './theme';
 
 const router = createBrowserRouter([
@@ -15,8 +15,8 @@ const router = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
-      { path: '/overview', element: <Overview /> },
-      { path: '/campaign', element: <Campaign /> },
+      { path: '/overview', element: <OverviewPage />, loader: overLoader },
+      { path: '/campaigns', element: <CampaignPage /> },
     ],
     errorElement: <Navigate to="/overview" />,
   },

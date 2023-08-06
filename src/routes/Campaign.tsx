@@ -1,3 +1,3 @@
-export const Campaign = () => {
+export const CampaignPage = () => {
   return <div>Campaign</div>;
 };
