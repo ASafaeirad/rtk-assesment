@@ -19,7 +19,7 @@ const drawerWidth = 240;
 const navItems = [
   { label: 'Overview', to: 'overview' },
   { label: 'Campaigns', to: 'campaigns' },
-  { label: 'Create', to: 'create' },
+  { label: 'Create', to: 'campaigns/new' },
 ];
 
 const Header = ({ onMenuButtonClick }: { onMenuButtonClick: VoidFunction }) => {
