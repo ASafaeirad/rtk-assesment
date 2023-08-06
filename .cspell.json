@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en",
+  "dictionaryDefinitions": [
+    {
+      "name": "adjoe",
+      "path": "./configs/cspell/words.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["adjoe"],
+  "ignorePaths": [
+    "node_modules/",
+    "dist/",
+    "*.svg",
+    "*.tsbuildinfo",
+    "*.mp4",
+    ".*"
+  ]
+}

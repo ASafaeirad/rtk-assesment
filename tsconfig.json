@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "extends": "@fullstacksjs/tsconfig/react",
+  "compilerOptions": {
+    "types": ["cypress", "@testing-library/cypress"]
+  },
+  "files": [],
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
