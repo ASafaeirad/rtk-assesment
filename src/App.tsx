@@ -5,21 +5,18 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
+import { Campaign } from './routes/Campaign';
+import { Overview } from './routes/Overview';
 import { theme } from './theme';
 
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <Navigate to="/overview" />,
     errorElement: <Navigate to="/overview" />,
   },
-  {
-    path: '/overview',
-    element: <div>Overview</div>,
-  },
-  {
-    path: '/campaign',
-    element: <div>Campaign</div>,
-  },
+  { path: '/overview', element: <Overview /> },
+  { path: '/campaign', element: <Campaign /> },
 ]);
 
 export const App = () => {
