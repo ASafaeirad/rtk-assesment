@@ -8,7 +8,7 @@ export const Layout = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <Nav />
-      <Box component="main" sx={{ p: 3 }}>
+      <Box sx={{ width: '100%' }} component="main">
         <Toolbar />
         <Outlet />
       </Box>
