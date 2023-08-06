@@ -2,3 +2,5 @@ fullstacksjs
 TTFB
 fontsource
 Adjoe
+Serie
+Nivo
