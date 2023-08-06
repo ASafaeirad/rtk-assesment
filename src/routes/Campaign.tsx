@@ -1,3 +1,4 @@
+import { isNullOrEmptyArray } from '@fullstacksjs/toolbox';
 import {
   Autocomplete,
   Box,
@@ -5,19 +6,32 @@ import {
   Divider,
   Stack,
   TextField,
+  Typography,
 } from '@mui/material';
 import type { Serie } from '@nivo/line';
 import { useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { LineChart } from '../components/LineChart';
-import { useGetCampaignQuery } from '../services/campaign';
+import {
+  useCreateCampaignMutation,
+  useGetCampaignQuery,
+} from '../services/campaign';
 import type { Campaign } from '../services/domain';
+
+interface Schema {
+  name: string;
+}
 
 export const CampaignPage = () => {
   const { data } = useGetCampaignQuery();
   const [selected, setSelected] = useState<Campaign | null>(null);
+  const [addCampaign] = useCreateCampaignMutation();
+  const { handleSubmit, register, formState } = useForm<Schema>();
 
-  console.log(selected);
+  const onSubmit = handleSubmit(({ name }) => {
+    addCampaign({ name });
+  });
 
   const installs: Serie[] | null = useMemo(
     () =>
@@ -35,12 +49,19 @@ export const CampaignPage = () => {
         : null,
     [selected],
   );
+  const isEmpty = isNullOrEmptyArray(installs?.[0].data);
 
   return (
     <Stack spacing={4} padding={4}>
-      <Stack spacing={2} component="form">
-        <TextField name="name" placeholder="My Awesome Campaign" />
-        <Button variant="contained">Submit</Button>
+      <Stack spacing={2} onSubmit={onSubmit} component="form">
+        <TextField
+          {...register('name', { required: true })}
+          label="Name"
+          placeholder="My Awesome Campaign"
+        />
+        <Button type="submit" disabled={!formState.isValid} variant="contained">
+          Submit
+        </Button>
       </Stack>
       <Divider />
       <Autocomplete
@@ -55,11 +76,13 @@ export const CampaignPage = () => {
         sx={{ width: 300 }}
         renderInput={params => <TextField {...params} label="Campaign" />}
       />
-      {installs ? (
+      {!isEmpty ? (
         <Box width="50%" height="300px">
-          <LineChart data={installs} legend="installs" />
+          <LineChart data={installs!} legend="installs" />
         </Box>
-      ) : null}
+      ) : (
+        <Typography>No Data</Typography>
+      )}
     </Stack>
   );
 };

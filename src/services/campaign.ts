@@ -1,3 +1,4 @@
+import { randomInt } from '@fullstacksjs/toolbox';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import type { Campaign } from './domain';
@@ -68,7 +69,29 @@ export const campaignApi = createApi({
       // query: () => ({ url: `campaign` }),
       queryFn: () => Promise.resolve({ data: mockCampaign }),
     }),
+    createCampaign: build.mutation<
+      { status: 201; id: string },
+      { name: string }
+    >({
+      queryFn() {
+        return Promise.resolve({
+          data: { status: 201, id: randomInt().toString() },
+        });
+      },
+      onQueryStarted({ name }, { dispatch }) {
+        dispatch(
+          campaignApi.util.updateQueryData('getCampaign', undefined, draft => {
+            const optimistic: Campaign = {
+              id: randomInt().toString(),
+              name,
+              installs: [],
+            };
+            draft.push(optimistic);
+          }),
+        );
+      },
+    }),
   }),
 });
 
-export const { useGetCampaignQuery } = campaignApi;
+export const { useGetCampaignQuery, useCreateCampaignMutation } = campaignApi;
